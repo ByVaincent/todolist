@@ -1,4 +1,5 @@
 import { useId, useState } from 'react'
+import { Input } from './form/Input'
 
 const taskInit = [
   {
@@ -27,6 +28,11 @@ function App() {
 
   return (
     <>
+      <div>
+        <Input
+          
+        />
+      </div>
       <DisplayTasks tasks={tasks}/>
       
 

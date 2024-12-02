@@ -1,7 +1,6 @@
 import { useId } from "react";
 
-export function Input({name, placeholder, value, onChange}){
-    const id = useId()
+export function Input({name, placeholder, value, onChange, id}){
     return(
         <input 
             type="text" 

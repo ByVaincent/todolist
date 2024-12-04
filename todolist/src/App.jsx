@@ -3,22 +3,19 @@ import { Input } from './form/Input'
 
 const tasksInit = [
   {
-      "id": 1,
+      "id": Date.now(),
       "name": "Faire les courses",
       "completed": false,
-      "selected": false
   },
   {
-      "id": 2,
+      "id": Date.now() + 1,
       "name": "Mettre de l'essence",
-      "completed": true,
-      "selected": false
+      "completed": false,
   },
   {
-      "id": 3,
+      "id": Date.now() + 2,
       "name": "Appeler grand mère",
       "completed": false,
-      "selected": false
   }
 ]
 
@@ -35,7 +32,6 @@ function App() {
       "id": Date.now(),
       "name": e.target.new_task.value,
       "completed": false,
-      "selected": false
     }
 
     if(e.target.new_task.value){
@@ -47,14 +43,17 @@ function App() {
     e.target.new_task.value = ''
   }
 
-
-  const selectTasks = (e) => {
-    // const tasksSelected = tasks.map((task) => {
-    //   if (task.id === e.target.id)
-    // })
-   console.log(e.target.checked)
+  const completedTasks = (e) => {
+    const tasksCompleted = tasks.map((task) => {
+      if(task.id === parseInt(e.target.id, 10)){
+        return {...task, completed: e.target.checked}
+      } else {
+        return task
+      }
+    })
+    console.log(tasksCompleted)
+    setTasks(tasksCompleted)
   }
-
 
 
   return (
@@ -67,7 +66,7 @@ function App() {
         />
         <button type='submit'>Créer la nouvelle tâche</button>
       </form>
-      <DisplayTasks tasks={tasks} onChange={selectTasks}/>
+      <DisplayTasks tasks={tasks} onChange={completedTasks}/>
       
 
     </>
@@ -84,6 +83,7 @@ function DisplayTasks({tasks, onChange}){
           type="checkbox" 
           id={task.id}
           onChange={onChange}
+          checked={task.completed}
 
           />
         {task.name}: {task.completed ? " OK":" À faire"}

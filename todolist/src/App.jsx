@@ -3,19 +3,22 @@ import { Input } from './form/Input'
 
 const tasksInit = [
   {
-      "id": Date.now(),
-      "name": "Faire les courses",
-      "completed": false,
+    "id": Date.now(),
+    "name": "Faire les courses",
+    "completed": false,
+    "selected": false
   },
   {
-      "id": Date.now() + 1,
-      "name": "Mettre de l'essence",
-      "completed": false,
+    "id": Date.now() + 1,
+    "name": "Mettre de l'essence",
+    "completed": false,
+    "selected": false
   },
   {
-      "id": Date.now() + 2,
-      "name": "Appeler grand mère",
-      "completed": false,
+    "id": Date.now() + 2,
+    "name": "Appeler grand mère",
+    "completed": false,
+    "selected": false
   }
 ]
 
@@ -34,9 +37,9 @@ function App() {
       "completed": false,
     }
 
-    if(e.target.new_task.value){
+    if (e.target.new_task.value) {
       setTasks([...tasks, newTask])
-    } else{
+    } else {
       alert("Merci dindiquer correctement une tâche")
     }
 
@@ -45,16 +48,43 @@ function App() {
 
   const completedTasks = (e) => {
     const tasksCompleted = tasks.map((task) => {
-      if(task.id === parseInt(e.target.id, 10)){
-        return {...task, completed: e.target.checked}
+      if (task.id === parseInt(e.target.id, 10)) {
+        return { ...task, completed: e.target.checked }
       } else {
         return task
       }
     })
-    console.log(tasksCompleted)
     setTasks(tasksCompleted)
   }
 
+  function selectTasks(e) {
+    console.log(e.target.id)
+    const tasksSelected = tasks.map((task) => {
+      if ('div_' + task.id === e.target.id && task.selected === false) {
+        return { ...task, selected: true }
+      } else if ('div_' + task.id === e.target.id && task.selected === true) {
+        return { ...task, selected: false }
+      } else {
+        return task
+      }
+    })
+
+    return setTasks(tasksSelected)
+  }
+
+  function delTasks() {
+    const tasksDeleted = tasks.filter((task) => {
+      return task.selected ? false : true
+    })
+    return setTasks(tasksDeleted)
+  }
+
+  const unselectTasks = () => (
+    setTasks(tasks.map((task)=> {
+      return {...task, selected: false}
+    }))
+  )
+  console.log(tasks)
 
   return (
     <>
@@ -66,30 +96,51 @@ function App() {
         />
         <button type='submit'>Créer la nouvelle tâche</button>
       </form>
-      <DisplayTasks tasks={tasks} onChange={completedTasks}/>
-      
+      <DisplayTasks
+        tasks={tasks}
+        onChange={completedTasks}
+        onClick={selectTasks}
+      />
+
+      <div>
+        <OptionsButton onClick={delTasks} name="Supprimer" />
+        <OptionsButton onClick={unselectTasks} name="Tout désélectionner"/>
+
+      </div>
+
+
 
     </>
   )
 }
 
 
-function DisplayTasks({tasks, onChange}){
+function DisplayTasks({ tasks, onChange, onClick }) {
   return <div>
     <h1>Liste des tâches </h1>
     {tasks.map((task) => {
-      return <div key={task.id}>
-        <input 
-          type="checkbox" 
+
+      return <div
+        key={task.id}
+        id={'div_' + task.id}
+        onClick={onClick}
+        className={(task.selected ? ' selected ' : '') + (task.completed ? " crossed_out_text " : "")}
+      >
+          {task.name}
+        <input
+          type="checkbox"
           id={task.id}
           onChange={onChange}
           checked={task.completed}
-
-          />
-        {task.name}: {task.completed ? " OK":" À faire"}
+        />
+        
       </div>
     })}
   </div>
+}
+
+function OptionsButton({ onClick, name }) {
+  return <button onClick={onClick}>{name}</button>
 }
 
 

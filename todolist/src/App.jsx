@@ -105,14 +105,6 @@ function App() {
         onClick={selectTasks}
       />
 
-      <div>
-        <OptionsButton onClick={delTasks} name="Supprimer" />
-        <OptionsButton onClick={unselectTasks} name="Tout désélectionner"/>
-
-      </div>
-
-
-
     </>
   )
 }
@@ -141,12 +133,6 @@ function DisplayTasks({ tasks, onChange, onClick }) {
     })}
   </div>
 }
-
-function OptionsButton({ onClick, name }) {
-  return <button onClick={onClick}>{name}</button>
-}
-
-
 
 export default App
 

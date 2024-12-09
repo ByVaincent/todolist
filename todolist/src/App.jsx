@@ -35,6 +35,7 @@ function App() {
       "id": Date.now(),
       "name": e.target.new_task.value,
       "completed": false,
+      "selected": false
     }
 
     if (e.target.new_task.value) {
@@ -88,13 +89,15 @@ function App() {
 
   return (
     <>
+      <h1>TÂCHES</h1>
       <form onSubmit={addNewTask}>
         <input
+          type='text'
           placeholder="Nouvelle tâche"
           name="new_task"
           id="new_task"
         />
-        <button type='submit'>Créer la nouvelle tâche</button>
+        <button type='submit'>Ajouter</button>
       </form>
       <DisplayTasks
         tasks={tasks}
@@ -117,23 +120,23 @@ function App() {
 
 function DisplayTasks({ tasks, onChange, onClick }) {
   return <div>
-    <h1>Liste des tâches </h1>
     {tasks.map((task) => {
 
       return <div
         key={task.id}
         id={'div_' + task.id}
         onClick={onClick}
-        className={(task.selected ? ' selected ' : '') + (task.completed ? " crossed_out_text " : "")}
+        className={(task.selected ? ' selected ' : '') + (task.completed ? " crossed_out_text " : "") + " div_task "}
       >
-          {task.name}
         <input
           type="checkbox"
           id={task.id}
           onChange={onChange}
           checked={task.completed}
         />
-        
+
+        {task.name}
+
       </div>
     })}
   </div>

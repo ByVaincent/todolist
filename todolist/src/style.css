@@ -1,0 +1,85 @@
+/* 
+000814
+001d3d
+003566
+ffc300
+ffd60a
+ */
+
+body {
+    background-color: #001d3d;
+    color: #ffc300;
+    font-family: Roboto, serif;
+    font-weight: 400;
+}
+
+main {
+    width: 100%;
+    max-width: 500px;
+    margin: 10% auto;
+}
+
+h1 {
+    font-family: "Montserrat Underline", sans-serif;
+    font-size: 3EM;
+}
+
+.crossed_out_text {
+    text-decoration: line-through;
+  }
+
+  .div_task{
+    color: #000814;
+    margin: 5px auto;
+    padding: 10px;
+    background-color: #ffc300;
+    border-radius: 5px;
+    box-shadow: 1px 1px 4px #000814 inset;
+  }
+
+  .div_task input {
+    margin-right: 10px;
+    background-color: #003566;
+  }
+
+.div_task:hover {
+    cursor:default;
+}
+
+.selected {
+    background-color: #003566;
+    color: #ffc300;
+    box-shadow: 1px 0px 4px #000814 inset;
+  }
+
+  form {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    margin-bottom: 10px;
+    gap: 2%;
+  }
+
+  input[type="text"]{
+    background-color: #ffc300;
+    color: #000814;
+    width: 70%;
+    height: 100%;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 4px #b3caed inset;
+
+    padding: 10px;
+  }
+
+  form button{
+    background-color: #003566;
+    width: 25%;
+    height: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: #ffc300;
+
+
+  }

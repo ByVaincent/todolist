@@ -35,11 +35,18 @@ h1 {
     background-color: #ffc300;
     border-radius: 5px;
     box-shadow: 1px 1px 4px #000814 inset;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
   }
 
-  .div_task input {
-    margin-right: 10px;
-    background-color: #003566;
+  .div_task input[type="checkbox"] {
+    margin-right:10px;
+  }
+
+  .div_task span{
+    width: 90%;
   }
 
 .div_task:hover {
@@ -67,29 +74,33 @@ h1 {
     height: 100%;
     border: none;
     border-radius: 5px;
-    box-shadow: 1px 1px 4px #b3caed inset;
-
+    box-shadow: 1px 1px 4px #000814 inset;
     padding: 10px;
   }
 
-  input[type="text"]::placeholder{
-    font-family: Roboto, serif;
-    color: #000814;
-    opacity: 0.5;
-  }
-
   form button{
-    background-color: #003566;
+    background-color: #003566; 
     width: 25%;
     height: 100%;
     padding: 10px;
     border: none;
     border-radius: 5px;
     color: #ffc300;
-    box-shadow: 0px 0px 5px #ffc300 inset;
+    text-shadow: 0px 0px 5px #ffc400a8;
+    box-shadow: 0px 0px 4px #fff3ca7d inset;
+    box-shadow: 0px 0px 4px #fff3ca7d ;
   }
 
   form button:active{
-    box-shadow: 0px 0px 4px #000814 inset;
-    color: #9e7900;
+    box-shadow: 1px 1px 4px #000814 inset;
+    text-shadow: 0px 0px 0px #ffc40052;
+  }
+
+  .bin{
+    height: 2em;
+  }
+
+  .bin:hover{
+    opacity: 0.5;
+    cursor: pointer;
   }

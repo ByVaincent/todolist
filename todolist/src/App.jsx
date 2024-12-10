@@ -58,34 +58,10 @@ function App() {
     setTasks(tasksCompleted)
   }
 
-  function selectTasks(e) {
-    console.log(e.target.id)
-    const tasksSelected = tasks.map((task) => {
-      if ('div_' + task.id === e.target.id && task.selected === false) {
-        return { ...task, selected: true }
-      } else if ('div_' + task.id === e.target.id && task.selected === true) {
-        return { ...task, selected: false }
-      } else {
-        return task
-      }
-    })
-
-    return setTasks(tasksSelected)
+  function delTask(e){
+    const newTasks = tasks.filter((task) => 'div_' + task.id !== e.target.parentNode.id)
+    setTasks(newTasks)
   }
-
-  function delTasks() {
-    const tasksDeleted = tasks.filter((task) => {
-      return task.selected ? false : true
-    })
-    return setTasks(tasksDeleted)
-  }
-
-  const unselectTasks = () => (
-    setTasks(tasks.map((task)=> {
-      return {...task, selected: false}
-    }))
-  )
-  console.log(tasks)
 
   return (
     <>
@@ -102,7 +78,7 @@ function App() {
       <DisplayTasks
         tasks={tasks}
         onChange={completedTasks}
-        onClick={selectTasks}
+        onClick={delTask}
       />
 
     </>
@@ -110,14 +86,14 @@ function App() {
 }
 
 
-function DisplayTasks({ tasks, onChange, onClick }) {
+
+function DisplayTasks({ tasks, onChange, onClick}) {
   return <div>
     {tasks.map((task) => {
 
       return <div
         key={task.id}
         id={'div_' + task.id}
-        onClick={onClick}
         className={(task.selected ? ' selected ' : '') + (task.completed ? " crossed_out_text " : "") + " div_task "}
       >
         <input
@@ -127,12 +103,27 @@ function DisplayTasks({ tasks, onChange, onClick }) {
           checked={task.completed}
         />
 
-        {task.name}
+        <span>{task.name}</span>
+
+        <ImageBin
+          onClick={onClick}
+        />
 
       </div>
     })}
   </div>
 }
+
+function ImageBin({onClick}){
+  return <img 
+    src="/public/poubelle.png" 
+    alt="Image d'une poubelle"
+    className='bin' 
+    onClick={onClick}
+    />
+}
+
+
 
 export default App
 

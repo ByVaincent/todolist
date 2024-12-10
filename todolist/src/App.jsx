@@ -58,7 +58,7 @@ function App() {
     setTasks(tasksCompleted)
   }
 
-  function delTask(e){
+  function delTask(e) {
     const newTasks = tasks.filter((task) => 'div_' + task.id !== e.target.parentNode.id)
     setTasks(newTasks)
   }
@@ -87,7 +87,7 @@ function App() {
 
 
 
-function DisplayTasks({ tasks, onChange, onClick}) {
+function DisplayTasks({ tasks, onChange, onClick }) {
   return <div>
     {tasks.map((task) => {
 
@@ -105,7 +105,10 @@ function DisplayTasks({ tasks, onChange, onClick}) {
 
         <span>{task.name}</span>
 
-        <ImageBin
+        <img
+          src="/public/poubelle.png"
+          alt="Image d'une poubelle"
+          className='bin'
           onClick={onClick}
         />
 
@@ -113,17 +116,6 @@ function DisplayTasks({ tasks, onChange, onClick}) {
     })}
   </div>
 }
-
-function ImageBin({onClick}){
-  return <img 
-    src="/public/poubelle.png" 
-    alt="Image d'une poubelle"
-    className='bin' 
-    onClick={onClick}
-    />
-}
-
-
 
 export default App
 

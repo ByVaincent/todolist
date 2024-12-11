@@ -28,6 +28,18 @@ function App() {
 
   const [tasks, setTasks] = useState(tasksInit)
 
+  function sortDisplayTasks(table) {
+    table.sort(function compareTasks(a, b) {
+      if (!a.completed) {
+        return -1
+      } else if (a.completed) {
+        return +1
+      }
+    })
+  }
+
+  sortDisplayTasks(tasks)
+
   const addNewTask = (e) => {
     e.preventDefault()
 
@@ -88,34 +100,47 @@ function App() {
 
 
 function DisplayTasks({ tasks, onChange, onClick }) {
+  const displayTasks = []
+  let lastTaskCompleted = false
+
+  for (let task of tasks) {
+    if (lastTaskCompleted != task.completed) {
+      displayTasks.push(<h3>Terminée(s)</h3>)
+    }
+
+    displayTasks.push(<div
+      key={task.id}
+      id={'div_' + task.id}
+      className={(task.selected ? ' selected ' : '') + (task.completed ? " crossed_out_text " : "") + " div_task "}
+    >
+      <input
+        type="checkbox"
+        id={task.id}
+        onChange={onChange}
+        checked={task.completed}
+      />
+
+      <span>{task.name}</span>
+
+      <img
+        src="/public/poubelle.png"
+        alt="Image d'une poubelle"
+        className='bin'
+        onClick={onClick}
+      />
+
+    </div>)
+
+    lastTaskCompleted = task.completed
+  }
+
   return <div>
-    {tasks.map((task) => {
-
-      return <div
-        key={task.id}
-        id={'div_' + task.id}
-        className={(task.selected ? ' selected ' : '') + (task.completed ? " crossed_out_text " : "") + " div_task "}
-      >
-        <input
-          type="checkbox"
-          id={task.id}
-          onChange={onChange}
-          checked={task.completed}
-        />
-
-        <span>{task.name}</span>
-
-        <img
-          src="/public/poubelle.png"
-          alt="Image d'une poubelle"
-          className='bin'
-          onClick={onClick}
-        />
-
-      </div>
-    })}
+    <h3>À faire</h3>
+    {displayTasks}
   </div>
+
 }
+
 
 export default App
 

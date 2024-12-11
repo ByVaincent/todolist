@@ -1,26 +1,7 @@
 import { useId, useRef, useState } from 'react'
 import { Input } from './form/Input'
 
-const tasksInit = [
-  {
-    "id": Date.now(),
-    "name": "Faire les courses",
-    "completed": false,
-    "selected": false
-  },
-  {
-    "id": Date.now() + 1,
-    "name": "Mettre de l'essence",
-    "completed": false,
-    "selected": false
-  },
-  {
-    "id": Date.now() + 2,
-    "name": "Appeler grand mère",
-    "completed": false,
-    "selected": false
-  }
-]
+const tasksInit = []
 
 
 
@@ -133,9 +114,10 @@ function DisplayTasks({ tasks, onChange, onClick }) {
 
     lastTaskCompleted = task.completed
   }
+  console.log(displayTasks)
 
   return <div>
-    <h3>À faire</h3>
+    {displayTasks.length > 0 && <h3>À faire</h3>}
     {displayTasks}
   </div>
 

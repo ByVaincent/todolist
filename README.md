@@ -1,2 +1,2 @@
 # todolist
-Projet personnel de todo list avec react, bootstrap
+Projet personnel de todo list avec react

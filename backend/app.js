@@ -14,7 +14,7 @@ app.use(express.json());
 
 app.get('/api/tasks', (req, res, next) => {
     res.status(200).json({message: "it works"})
-})
+});
 
 app.post('/api/tasks', (req, res, next) => {
     const newTask = new Task({
@@ -23,8 +23,13 @@ app.post('/api/tasks', (req, res, next) => {
     newTask.save()
         .then((task) => res.status(200).json({message: `Nouvelle tâche créée avec succès: ${task}`}))
         .catch(error => res.status(400).json({error}));
-})
+});
 
+app.delete('/api/tasks/div_:id', (req, res, next) => {
+    Task.deleteOne({id: req.params.id})
+        .then(() => res.status(200).json({message: 'Tâche supprimée avec succès!'}))
+        .catch(error => res.status(400).json({error}))
+})
 
 
 

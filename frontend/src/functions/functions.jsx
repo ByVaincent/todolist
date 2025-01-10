@@ -11,6 +11,12 @@ export function sortDisplayTasks(table) {
 export function filterTableDeletedItem(value, table, setTable) {
     const newTasks = table.filter((task) => 'div_' + task.id !== value)
     setTable(newTasks)
+    fetch(`http://localhost:3000/api/tasks/${value}`, {
+        method: "DELETE",
+        headers: {
+            "Content-type" : "application/json"
+        }
+    })
 }
 
 export function updateTableCompletedItem(value, table, setTable) {

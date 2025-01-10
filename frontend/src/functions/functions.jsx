@@ -33,9 +33,16 @@ export function updateTableNewItem(val, table, setTable) {
     }
 
     if (val.new_task.value) {
-      setTable([...table, newItem])
+      setTable([...table, newItem]);
+      fetch('http://localhost:3000/api/tasks', {
+        method: 'POST',
+        headers: {
+            "Content-Type" : "application/json"
+        },
+        body: JSON.stringify({...newItem})
+      })
     } else {
-      alert("Merci dindiquer correctement une tâche")
+      alert("Merci d' indiquer correctement une tâche")
     }
 
     val.new_task.value = ''

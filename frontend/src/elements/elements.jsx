@@ -1,10 +1,10 @@
-export function DisplayTasks({ tasks, onChange, onClick }) {
+export function DisplayTasks({ tasks, onChange, onClick, useId }) {
     const displayTasks = []
     let lastTaskCompleted = false
   
     for (let task of tasks) {
       if (lastTaskCompleted != task.completed) {
-        displayTasks.push(<h3>Terminée(s)</h3>)
+        displayTasks.push(<h3 key='completedTasksTitle'>Terminée(s)</h3>)
       }
   
       displayTasks.push(<div

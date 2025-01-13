@@ -13,7 +13,9 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/api/tasks', (req, res, next) => {
-    res.status(200).json({message: "it works"})
+    Task.find()
+    .then(tasks => res.status(200).json(tasks))
+    .catch(error => res.status(400).json({error}))
 });
 
 app.post('/api/tasks', (req, res, next) => {

@@ -1,13 +1,17 @@
-import { useId, useRef, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import { Input } from './form/Input'
 import { DisplayTasks, NewTaskInput} from './elements/elements'
-import { filterTableDeletedItem, updateTableCompletedItem, sortDisplayTasks, updateTableNewItem } from './functions/functions'
+import { filterTableDeletedItem, updateTableCompletedItem, sortDisplayTasks, updateTableNewItem, getTasksFromApi } from './functions/functions'
 
 const tasksInit = []
 
 function App() {
 
   const [tasks, setTasks] = useState(tasksInit)
+
+  useEffect(() => {
+    getTasksFromApi(setTasks);
+  }, [])
 
   sortDisplayTasks(tasks)
 

@@ -1,3 +1,20 @@
+export async function getTasksFromApi(setTable) {
+    const tasks = await fetch('http://localhost:3000/api/tasks', {
+        method: 'GET',
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Une erreur est survenue lors de la récupération des tâches');
+            }
+            return (response.json())
+        })
+        .catch(error => console.error("Problème lors de la récupération des tâches: ", error));
+    
+    setTable(tasks)
+}
+
+
+
 export function sortDisplayTasks(table) {
     table.sort(function compareTasks(a, b) {
         if (!a.completed) {
@@ -14,7 +31,7 @@ export function filterTableDeletedItem(value, table, setTable) {
     fetch(`http://localhost:3000/api/tasks/${value}`, {
         method: "DELETE",
         headers: {
-            "Content-type" : "application/json"
+            "Content-type": "application/json"
         }
     })
 }
@@ -32,24 +49,24 @@ export function updateTableCompletedItem(value, table, setTable) {
 
 export function updateTableNewItem(val, table, setTable) {
     const newItem = {
-      "id": Date.now(),
-      "name": val.new_task.value,
-      "completed": false,
-      "selected": false
+        "id": Date.now(),
+        "name": val.new_task.value,
+        "completed": false,
+        "selected": false
     }
 
     if (val.new_task.value) {
-      setTable([...table, newItem]);
-      fetch('http://localhost:3000/api/tasks', {
-        method: 'POST',
-        headers: {
-            "Content-Type" : "application/json"
-        },
-        body: JSON.stringify({...newItem})
-      })
+        setTable([...table, newItem]);
+        fetch('http://localhost:3000/api/tasks', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ ...newItem })
+        })
     } else {
-      alert("Merci d' indiquer correctement une tâche")
+        alert("Merci d' indiquer correctement une tâche")
     }
 
     val.new_task.value = ''
-  }
+}

@@ -39,12 +39,20 @@ export function filterTableDeletedItem(value, table, setTable) {
 export function updateTableCompletedItem(value, table, setTable) {
     const itemCompleted = table.map((item) => {
         if (item.id === parseInt(value.id, 10)) {
+            fetch(`http://localhost:3000/api/tasks/${parseInt(value.id,10)}/${value.checked}`, {
+                method: 'PUT',
+                headers: {
+                    "Content-Type": "application.json"
+                },
+                body: JSON.stringify({...item, completed: value.checked})
+            })
             return { ...item, completed: value.checked }
         } else {
             return item
         }
     })
     setTable(itemCompleted)
+    
 }
 
 export function updateTableNewItem(val, table, setTable) {

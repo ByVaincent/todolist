@@ -4,6 +4,7 @@ import { DisplayTasks, NewTaskInput} from './elements/elements'
 import { filterTableDeletedItem, updateTableCompletedItem, sortDisplayTasks, updateTableNewItem, getTasksFromApi } from './functions/functions'
 
 const tasksInit = []
+const authentication = false;
 
 function App() {
 
@@ -29,7 +30,9 @@ function App() {
 
   return (
     <>
-      <h1>TÂCHES</h1>
+      { authentication && (
+        <>
+        <h1>TÂCHES</h1>
       
       <NewTaskInput onSubmit={addNewTask}/>
 
@@ -38,7 +41,8 @@ function App() {
         onChange={completedTasks}
         onClick={delTask}
       />
-
+      </>)
+      }
     </>
   )
 }

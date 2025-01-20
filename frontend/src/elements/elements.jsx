@@ -57,17 +57,56 @@ export function NewTaskInput({ onSubmit }) {
   </form>
 }
 
-export function SignIn({ onSubmit }) {
-  return <>
-    <form className="authentication" onSubmit={(e) => {
+export function LogIn({ onSubmit, onClick }) {
+  return <div className="authentication">
+    <h2>LOG IN</h2>
+    <form className="login" onSubmit={(e) => {
       e.preventDefault()
       onSubmit(e.target)
     }}>
       <label htmlFor="login_email">Email:</label>
-      <input type="email" name="login_email" id="login_email" />
+      <input type="email" name="login_email" id="login_email" required />
       <label htmlFor="login-password">Mot de passe:</label>
-      <input type="password" name="login_password" id="login_password" />
+      <input type="password" name="login_password" id="login_password" required />
       <button type="submit">Se connecter</button>
+
     </form>
-  </>
+    <a
+      href="*"
+      onClick={(e) => {
+        e.preventDefault()
+        onClick(e.target)
+      }}>
+      Pas encore de compte?
+    </a>
+
+
+  </div>
+}
+
+export function SignIn({ onSubmit, onClick }) {
+  return <div className="authentication">
+    <h2>SIGN IN</h2>
+    <form className="login" onSubmit={(e) => {
+      e.preventDefault()
+      onSubmit(e.target)
+    }}>
+      <label htmlFor="signin_email">Email:</label>
+      <input type="email" name="signin_email" id="signin_email" required />
+      <label htmlFor="signin-password">Mot de passe:</label>
+      <input type="password" name="signin_password" id="signin_password" required />
+      <button type="submit">Créer un compte</button>
+
+    </form>
+    <a
+      href="*"
+      onClick={(e) => {
+        e.preventDefault()
+        onClick(e.target)
+      }}>
+      Déjà un compte?
+    </a>
+
+
+  </div>
 }

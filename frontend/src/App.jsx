@@ -11,6 +11,8 @@ function App() {
   const [tasks, setTasks] = useState(tasksInit)
   const [authentication, setAuthentication] = useState(false)
   const [noAccount, setNoAccount] = useState(false);
+  const [userId, setUserId] = useState(null);
+  console.log(userId)
 
   useEffect(() => {
     getTasksFromApi(setTasks);
@@ -19,7 +21,7 @@ function App() {
   sortDisplayTasks(tasks)
 
   const addNewTask = (v) => {
-    updateTableNewItem(v, tasks, setTasks)
+    updateTableNewItem(v, tasks, setTasks, userId)
   }
 
   const completedTasks = (v) => {
@@ -31,7 +33,7 @@ function App() {
   }
 
   const logIn = (v) => {
-    logInFunction(v, setAuthentication)
+    logInFunction(v, setAuthentication, setUserId)
   }
 
   const signIn = (v) => {

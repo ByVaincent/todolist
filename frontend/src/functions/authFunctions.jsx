@@ -1,4 +1,4 @@
-export async function logInFunction(v, setAuthentication) {
+export async function logInFunction(v, setAuthentication, setUserId) {
     const body = JSON.stringify({
         email: v.login_email.value,
         password: v.login_password.value
@@ -17,6 +17,7 @@ export async function logInFunction(v, setAuthentication) {
             if (data.status === 401 || data.status === 500) {
                 alert(data.message)
             } else {
+                setUserId(data.userId);
                 setAuthentication(true);
             }
 

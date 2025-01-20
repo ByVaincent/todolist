@@ -55,13 +55,15 @@ export function updateTableCompletedItem(value, table, setTable) {
     
 }
 
-export function updateTableNewItem(val, table, setTable) {
+export function updateTableNewItem(val, table, setTable, userId) {
     const newItem = {
         "id": Date.now(),
+        "userId": userId,
         "name": val.new_task.value,
         "completed": false,
         "selected": false
     }
+    console.log(newItem)
 
     if (val.new_task.value) {
         setTable([...table, newItem]);

@@ -1,14 +1,15 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import { Input } from './form/Input'
-import { DisplayTasks, NewTaskInput} from './elements/elements'
+import { DisplayTasks, NewTaskInput, SignIn} from './elements/elements'
 import { filterTableDeletedItem, updateTableCompletedItem, sortDisplayTasks, updateTableNewItem, getTasksFromApi } from './functions/functions'
+import { logInFunction } from './functions/authFunctions'
 
 const tasksInit = []
-const authentication = false;
 
 function App() {
 
   const [tasks, setTasks] = useState(tasksInit)
+  const [authentication, setAuthentication] = useState(false)
 
   useEffect(() => {
     getTasksFromApi(setTasks);
@@ -28,8 +29,15 @@ function App() {
     filterTableDeletedItem(v, tasks, setTasks)
   }
 
+  const logIn = (v) => {
+    logInFunction(v, setAuthentication)
+  }
+
   return (
     <>
+      {!authentication && (
+        <SignIn onSubmit={logIn}/>
+      )}
       { authentication && (
         <>
         <h1>TÂCHES</h1>

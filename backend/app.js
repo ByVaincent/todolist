@@ -1,7 +1,9 @@
 import express from 'express';
+import bodyParser from 'body-parser';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import router from './routes/tasks.js';
+import tasksRoutes from './routes/tasks.js';
+import usersRoutes from './routes/users.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -12,10 +14,11 @@ mongoose.connect(process.env.API_CONNECTION_STRING)
     .catch(() => console.log('Connexion à mongoDB failed'))
 
 app.use(cors());
-app.use(express.json());
+app.use(bodyParser.json());
 
-const tasksRoutes = router;
 app.use('/api/tasks', tasksRoutes);
+app.use('/api/users', usersRoutes);
+
 
 
 

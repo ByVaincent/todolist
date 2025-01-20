@@ -4,7 +4,7 @@ import { DisplayTasks, NewTaskInput} from './elements/elements'
 import { filterTableDeletedItem, updateTableCompletedItem, sortDisplayTasks, updateTableNewItem, getTasksFromApi } from './functions/functions'
 
 const tasksInit = []
-const authentication = false;
+const authentication = true;
 
 function App() {
 

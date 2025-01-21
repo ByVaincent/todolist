@@ -3,7 +3,7 @@ export async function logInFunction(v, setAuthentication, setUserId) {
         email: v.login_email.value,
         password: v.login_password.value
     })
-  
+  console.log(body)
     fetch(`http://localhost:3000/api/users/login`, {
         method: "POST",
         headers: {

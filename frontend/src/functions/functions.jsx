@@ -1,5 +1,5 @@
-export async function getTasksFromApi(setTable) {
-    const tasks = await fetch('http://localhost:3000/api/tasks', {
+export async function getTasksFromApi(setTable, userId) {
+    const tasks = await fetch(`http://localhost:3000/api/tasks/${userId}`, {
         method: 'GET',
     })
         .then((response) => {
@@ -79,4 +79,11 @@ export function updateTableNewItem(val, table, setTable, userId) {
     }
 
     val.new_task.value = ''
+}
+
+export function userDeconnexion(event, setTable, setUser, setAuth){
+    event.preventDefault();
+    setTable([]);
+    setUser(null);
+    setAuth(false);
 }

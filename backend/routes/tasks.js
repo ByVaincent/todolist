@@ -3,7 +3,7 @@ import tasksCtrl from "../controllers/tasks.js";
 const router = express.Router();
 
 
-router.get('/', tasksCtrl.getAllTasks);
+router.get('/:userid', tasksCtrl.getAllTasks);
 
 router.post('/', tasksCtrl.createTasks);
 

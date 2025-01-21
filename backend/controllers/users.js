@@ -19,7 +19,7 @@ function signUp(req, res, next) {
                     })
                     .catch(error => res.status(500).json({ error }));
             } else {
-                res.status(408).json({ message: "Cet email est gigit déjà utilisé!" })
+                res.status(408).json({ message: "Cet email est déjà utilisé!" })
             }
         })
 }
@@ -28,10 +28,10 @@ function signUp(req, res, next) {
 function logIn(req, res, next) {
     User.findOne({ email: req.body.email })
         .then(user => {
-            console.log(user)
             if (!user) {
-                res.status(401).json({ status: 401, message: "L'email ou le mot de passe est incorrecte" })
+                return res.status(401).json({ status: 401, message: "L'email ou le mot de passe est incorrecte" })
             } 
+            
             bcrypt.compare(req.body.password, user.password)
                 .then(valid => {
                     if(!valid){
@@ -42,9 +42,10 @@ function logIn(req, res, next) {
                         userId: user._id
                     })
                 })
+                .catch(error => res.status(401).json({ status: 401, message: "L'email ou le mot de passe est incorrecte"}))
 
         })
-        .catch(error => res.status(500).json({status: 500, error }))
+        .catch(error => res.status(500).json({error}))
 };
 
 export default {

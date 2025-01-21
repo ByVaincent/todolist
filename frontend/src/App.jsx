@@ -1,7 +1,6 @@
 import { useEffect, useId, useRef, useState } from 'react'
-import { Input } from './form/Input'
 import { DisplayTasks, NewTaskInput, LogIn, SignIn } from './elements/elements'
-import { filterTableDeletedItem, updateTableCompletedItem, sortDisplayTasks, updateTableNewItem, getTasksFromApi } from './functions/functions'
+import { filterTableDeletedItem, updateTableCompletedItem, sortDisplayTasks, updateTableNewItem, getTasksFromApi, userDeconnexion } from './functions/functions'
 import { logInFunction, signInFunction } from './functions/authFunctions'
 
 const tasksInit = []
@@ -12,11 +11,10 @@ function App() {
   const [authentication, setAuthentication] = useState(false)
   const [noAccount, setNoAccount] = useState(false);
   const [userId, setUserId] = useState(null);
-  console.log(userId)
 
   useEffect(() => {
-    getTasksFromApi(setTasks);
-  }, [])
+    getTasksFromApi(setTasks, userId);
+  }, [userId])
 
   sortDisplayTasks(tasks)
 
@@ -47,6 +45,10 @@ function App() {
   const alreadyHaveAnAccountLink = () => {
     setNoAccount(!noAccount)
   }
+
+  const deconnexion = (e) => {
+    userDeconnexion(e, setTasks, setUserId, setAuthentication)
+  }
   return (
     <>
       {!authentication && !noAccount && <LogIn onSubmit={logIn} onClick={noAccountLink} />}
@@ -54,8 +56,14 @@ function App() {
 
       {authentication && (
         <>
+          <div className='entete_app'>
           <h1>TÂCHES</h1>
-
+          <a 
+            href="*" 
+            onClick={deconnexion}>
+              <button>Déconnexion</button>
+          </a>
+          </div>
           <NewTaskInput onSubmit={addNewTask} />
 
           <DisplayTasks

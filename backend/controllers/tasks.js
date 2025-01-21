@@ -10,7 +10,7 @@ function createTasks(req, res, next){
 };
 
 function getAllTasks(req, res, next){
-    Task.find()
+    Task.find({userId: req.params.userid})
     .then(tasks => res.status(200).json(tasks))
     .catch(error => res.status(400).json({error}))
 }

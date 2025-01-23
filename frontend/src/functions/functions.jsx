@@ -1,5 +1,5 @@
-export async function getTasksFromApi(setTable) {
-    const tasks = await fetch('http://localhost:3000/api/tasks', {
+export async function getTasksFromApi(setTable, userId) {
+    const tasks = await fetch(`http://localhost:3000/api/tasks/${userId}`, {
         method: 'GET',
     })
         .then((response) => {
@@ -55,13 +55,15 @@ export function updateTableCompletedItem(value, table, setTable) {
     
 }
 
-export function updateTableNewItem(val, table, setTable) {
+export function updateTableNewItem(val, table, setTable, userId) {
     const newItem = {
         "id": Date.now(),
+        "userId": userId,
         "name": val.new_task.value,
         "completed": false,
         "selected": false
     }
+    console.log(newItem)
 
     if (val.new_task.value) {
         setTable([...table, newItem]);
@@ -77,4 +79,11 @@ export function updateTableNewItem(val, table, setTable) {
     }
 
     val.new_task.value = ''
+}
+
+export function userDeconnexion(event, setTable, setUser, setAuth){
+    event.preventDefault();
+    setTable([]);
+    setUser(null);
+    setAuth(false);
 }

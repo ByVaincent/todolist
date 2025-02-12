@@ -9,8 +9,6 @@ import {
   userDeconnexion,
 } from "./functions/functions";
 import { logInFunction, signInFunction } from "./functions/authFunctions";
-import dotenv from "dotenv";
-dotenv.config();
 
 const tasksInit = [];
 

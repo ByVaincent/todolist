@@ -1,10 +1,12 @@
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+
 export async function logInFunction(v, setAuthentication, setUserId) {
   const body = JSON.stringify({
     email: v.login_email.value,
     password: v.login_password.value,
   });
   console.log(body);
-  fetch(`http://localhost:4000/api/users/login`, {
+  fetch(`http://${SERVER_URL}/api/users/login`, {
     method: "POST",
     headers: {
       "Content-type": "application/json",
@@ -29,7 +31,7 @@ export async function signInFunction(v, setNoAccount) {
     password: v.signin_password.value,
   });
 
-  fetch("http://localhost:4000/api/users/signup", {
+  fetch("http://${SERVER_URL}/api/users/signup", {
     method: "POST",
     headers: {
       "Content-type": "application/json",

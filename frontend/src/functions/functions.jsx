@@ -1,5 +1,7 @@
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+
 export async function getTasksFromApi(setTable, userId) {
-  const tasks = await fetch(`http://localhost:4000/api/tasks/${userId}`, {
+  const tasks = await fetch(`${SERVER_URL}/api/tasks/${userId}`, {
     method: "GET",
   })
     .then((response) => {
@@ -30,7 +32,7 @@ export function sortDisplayTasks(table) {
 export function filterTableDeletedItem(value, table, setTable) {
   const newTasks = table.filter((task) => "div_" + task.id !== value);
   setTable(newTasks);
-  fetch(`http://localhost:4000/api/tasks/${value}`, {
+  fetch(`${SERVER_URL}/api/tasks/${value}`, {
     method: "DELETE",
     headers: {
       "Content-type": "application/json",
@@ -42,7 +44,7 @@ export function updateTableCompletedItem(value, table, setTable) {
   const itemCompleted = table.map((item) => {
     if (item.id === parseInt(value.id, 10)) {
       fetch(
-        `http://localhost:4000/api/tasks/${parseInt(value.id, 10)}/${
+        `http://${SERVER_URL}/api/tasks/${parseInt(value.id, 10)}/${
           value.checked
         }`,
         {
@@ -73,7 +75,7 @@ export function updateTableNewItem(val, table, setTable, userId) {
 
   if (val.new_task.value) {
     setTable([...table, newItem]);
-    fetch("http://localhost:4000/api/tasks", {
+    fetch(`http://${SERVER_URL}/api/tasks`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

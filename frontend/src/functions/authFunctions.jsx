@@ -31,7 +31,7 @@ export async function signInFunction(v, setNoAccount) {
     password: v.signin_password.value,
   });
 
-  fetch("http://${SERVER_URL}/api/users/signup", {
+  fetch(`http://${SERVER_URL}/api/users/signup`, {
     method: "POST",
     headers: {
       "Content-type": "application/json",

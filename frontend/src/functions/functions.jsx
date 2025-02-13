@@ -1,4 +1,4 @@
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+const SERVER_URL = "https://todolist-server-h39x.onrender.com";
 
 export async function getTasksFromApi(setTable, userId) {
   const tasks = await fetch(`${SERVER_URL}/api/tasks/${userId}`, {
@@ -44,9 +44,7 @@ export function updateTableCompletedItem(value, table, setTable) {
   const itemCompleted = table.map((item) => {
     if (item.id === parseInt(value.id, 10)) {
       fetch(
-        `http://${SERVER_URL}/api/tasks/${parseInt(value.id, 10)}/${
-          value.checked
-        }`,
+        `${SERVER_URL}/api/tasks/${parseInt(value.id, 10)}/${value.checked}`,
         {
           method: "PUT",
           headers: {
@@ -71,11 +69,10 @@ export function updateTableNewItem(val, table, setTable, userId) {
     completed: false,
     selected: false,
   };
-  console.log(newItem);
 
   if (val.new_task.value) {
     setTable([...table, newItem]);
-    fetch(`http://${SERVER_URL}/api/tasks`, {
+    fetch(`${SERVER_URL}/api/tasks`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

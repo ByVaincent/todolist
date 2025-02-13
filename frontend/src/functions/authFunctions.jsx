@@ -1,12 +1,11 @@
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+const SERVER_URL = "https://todolist-server-h39x.onrender.com";
 
 export async function logInFunction(v, setAuthentication, setUserId) {
   const body = JSON.stringify({
     email: v.login_email.value,
     password: v.login_password.value,
   });
-  console.log(body);
-  fetch(`http://${SERVER_URL}/api/users/login`, {
+  fetch(`${SERVER_URL}/api/users/login`, {
     method: "POST",
     headers: {
       "Content-type": "application/json",
@@ -31,7 +30,7 @@ export async function signInFunction(v, setNoAccount) {
     password: v.signin_password.value,
   });
 
-  fetch(`http://${SERVER_URL}/api/users/signup`, {
+  fetch(`${SERVER_URL}/api/users/signup`, {
     method: "POST",
     headers: {
       "Content-type": "application/json",

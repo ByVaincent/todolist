@@ -1,4 +1,4 @@
-const SERVER_URL = "http://localhost:4000";
+const SERVER_URL = "https://todolist-server-h39x.onrender.com";
 
 export async function getTasksFromApi(setTable, userId) {
   const tasks = await fetch(`${SERVER_URL}/api/tasks/${userId}`, {

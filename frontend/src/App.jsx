@@ -18,9 +18,9 @@ function App() {
   const [noAccount, setNoAccount] = useState(false);
   const [userId, setUserId] = useState(null);
 
-  setTimeout(() => {
+  useEffect(() => {
     getTasksFromApi(setTasks, userId);
-  }, 20000);
+  }, [userId]);
 
   sortDisplayTasks(tasks);
 

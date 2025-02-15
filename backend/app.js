@@ -18,10 +18,14 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-  res.status(200).json({ message: "Running" });
+  res.status(200).json({ message: "Coucou!" });
 });
 
 app.use("/api/tasks", tasksRoutes);
 app.use("/api/users", usersRoutes);
+
+app.all("*", (req, res) => {
+  res.status(404).json("Not Found");
+});
 
 export default app;

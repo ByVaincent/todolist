@@ -1,4 +1,4 @@
-const SERVER_URL = "http://localhost:4000"; //"https://todolist-server-h39x.onrender.com"
+const SERVER_URL = "https://todolist-server-h39x.onrender.com"; //"http://localhost:4000";
 
 export async function logInFunction(v, setAuthentication, setUserId) {
   const body = JSON.stringify({

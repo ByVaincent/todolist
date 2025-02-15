@@ -69,7 +69,7 @@ function App() {
           <div className="entete_app">
             <h1>TÂCHES</h1>
             <a href="*" onClick={deconnexion}>
-              <button>Déconnexion</button>
+              <button>Logout</button>
             </a>
           </div>
           <NewTaskInput onSubmit={addNewTask} />

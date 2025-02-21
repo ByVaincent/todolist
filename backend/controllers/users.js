@@ -31,8 +31,6 @@ function signUp(req, res, next) {
 }
 
 function logIn(req, res, next) {
-  //refaire un user.findOne
-  // tasksCtrl.deleteTestTasks();
   User.findOne({ email: req.body.email })
     .then((user) => {
       if (!user) {
@@ -50,7 +48,7 @@ function logIn(req, res, next) {
                 message: "L'email ou le mot de passe est incorrecte",
               });
             } else {
-              if (user._id.toString() === "67ae60d2bcf9f65053798760") {
+              if (user._id.toString() === "67b88a6932e1dfd1a5859998") {
                 tasksCtrl.deleteTestTasks();
               }
 

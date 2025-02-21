@@ -38,7 +38,7 @@ function deleteTask(req, res, next) {
 //Fonction pour supprimer les tâches de l'utilisateur test
 function deleteTestTasks() {
   Task.deleteMany({
-    userId: "67ae60d2bcf9f65053798760",
+    userId: "67b88a6932e1dfd1a5859998",
   })
     .then(() => {
       console.log("Tâches test supprimées");
